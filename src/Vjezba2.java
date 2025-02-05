@@ -51,8 +51,11 @@ public class Vjezba2 {
             recenicaArray[j] = recenicaArray [recenicaArray.length -1 -j];
             recenicaArray [recenicaArray.length -1 -j] = rijec;
         }
+        String obrnutaRecenica = "";
         for (String s : recenicaArray) {
-            System.out.print(s + " ");
+            obrnutaRecenica += " " + s;
         }
+        obrnutaRecenica = obrnutaRecenica.trim();
+        System.out.println(obrnutaRecenica);
     }
 }
