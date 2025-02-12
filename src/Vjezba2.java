@@ -1,5 +1,8 @@
+import jdk.jfr.Unsigned;
+
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Vjezba2 {
@@ -16,14 +19,37 @@ public class Vjezba2 {
             Ostali znakovi: 5
          */
 
+        System.out.println("Unesite recenicu");
         Scanner scanner = new Scanner(System.in);
         String linija = scanner.nextLine();
+        pobroji(linija);
 
+        // 2. zadatak
+        // rijeci pomocu skenera obrnuti ijeci unazad
+        /*
+            Napišite program u Javi koji će učitati niz znakova (string) sa standardnog ulaza i okrenuti redoslijed riječi u unesenom stringu. Prikazati transformirani string s obrnutim redoslijedom riječi.
+            Primjer ulaza: Dobar dan svima
+            Primjer izlaza: svima dan Dobar
+        */
+        System.out.println("Unesite recenicu:");
+        String recenica = scanner.nextLine();
+        System.out.println("Obrnuta recenica je:");
+        System.out.println(obrniRecenicu(recenica));
+    }
+
+    public static String obrniRecenicu(String recenica) {
+        List<String> recenicaList = Arrays.stream(recenica.split(" ")).toList();
+        for (int j = 0; j <  recenicaList.size() / 2; j++) {
+            Collections.swap(recenicaList, j, recenicaList.size() - 1 - j);
+        }
+        return String.join(" ",recenicaList);
+    }
+
+    public static void pobroji(String recenica) {
         int brojSlova = 0;
         int brojBrojeva = 0;
         int brojOstalih = 0;
-        for (int i = 0;  i < linija.length(); i++) {
-            char znak = linija.charAt(i);
+        for (char znak : recenica.toCharArray()) {
             if (Character.isAlphabetic(znak)) {
                 brojSlova++;
             } else if (Character.isDigit(znak)) {
@@ -35,36 +61,5 @@ public class Vjezba2 {
         System.out.println("Slova: " + brojSlova);
         System.out.println("Brojeva: " + brojBrojeva);
         System.out.println("Ostali znakovi: " + brojOstalih);
-
-        // 2. zadatak
-        // rijeci pomocu skenera obrnuti ijeci unazad
-        /*
-            Napišite program u Javi koji će učitati niz znakova (string) sa standardnog ulaza i okrenuti redoslijed riječi u unesenom stringu. Prikazati transformirani string s obrnutim redoslijedom riječi.
-            Primjer ulaza: Dobar dan svima
-            Primjer izlaza: svima dan Dobar
-        */
-
-        String recenica = scanner.nextLine();
-        String[] recenicaArray = recenica.split(" ");
-        /*
-        for (int j=0; j <  recenicaArray.length / 2; j++) {
-            String rijec = recenicaArray[j];
-            recenicaArray[j] = recenicaArray [recenicaArray.length -1 -j];
-            recenicaArray [recenicaArray.length -1 -j] = rijec;
-        }
-        */
-
-        for (int j = 0; j <  recenicaArray.length / 2; j++) {
-            Collections.swap(Arrays.asList(recenicaArray), j, recenicaArray.length - 1 - j);
-        }
-        /*
-        String obrnutaRecenica = "";
-        for (String s : recenicaArray) {
-            obrnutaRecenica  += " " + s;
-        }
-        obrnutaRecenica = obrnutaRecenica.trim();
-         */
-        String obrnutaRecenica = String.join(" ", recenicaArray);
-        System.out.println(obrnutaRecenica);
     }
 }
